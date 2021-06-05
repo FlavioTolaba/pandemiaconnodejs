@@ -10,7 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "faker": "^5.5.3",
     "log4js": "^6.3.0",
-    "underscore": "^1.13.1"
+    "underscore": "^1.13.1",
+    "uuid": "^8.3.2"
   }
 }
