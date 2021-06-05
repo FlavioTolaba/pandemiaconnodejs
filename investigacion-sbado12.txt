@@ -1,0 +1,6 @@
+Poder loguear en ApacheMQ
+Poder loguear en Kafka
+poder loguear en Slack
+
+La idea es investigar lo que les interese mas.
+
