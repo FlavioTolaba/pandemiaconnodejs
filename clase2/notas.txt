@@ -1,0 +1,115 @@
+----------------------------------------------------------------------
+Seguridad
+----------------------------------------------------------------------
+
+Encriptacion
+   a) Simétrica
+      A ----> ALGO:KEY --- TXT_CIFRADO -----> B ---> ALGO:KEY  TXT_ORG
+      A <----------------------------------------------------------- B  
+                              man in the middle
+ 
+   b) Asimetrica inventada en 1967 (Era computacional)
+
+      Red ip puede ser interceptado el mensje
+      Maquinas son rapidas
+
+      Encriptar con una [clave] y desenciptar con [otra].
+      Puedo deducir una clave teniendo la otra ? SI pero lleva mucho tiempo
+      Clave publica y privada, se cambian una vez al año.      
+
+   c) Checksum una vez encriptado NO se puede desencriptar
+      es una funcion sobreyectiva donde infinitos inputs potencialmente el
+      mismo output
+
+      Suponiendo que mi password es Andy72PatronesyNode -> 
+      39187c494de1bf17d23619e811bbff50d14982f73edfc1968a31f5f5e0d17b31
+
+      Passwords
+      Arquitecturas inmutables Kafka, Git, BitCoin, Etherium, blockchain
+
+      Leyes, Fallos judiciales, contabilidad.
+
+HTTP Headers
+------------
+
+      Mecanismo de autenticacion
+
+             a) Usuario y password
+             b) Token expedido por el sistema
+
+      Como se envia el usuario y password
+
+      Authorization: Basic base64(usu:pass)
+
+      Que es base64, asi como tenemos una base 2 binario, tenemos base10 usamos
+      todos los dias, tenemos base 16 o hexadecimal, base64 son 64 posibles 
+      digitos.
+
+      Browser/Programa -----------------------------------|------- ServicioLogin
+                                  HTTPS                      HTTP
+
+      La idea es que el usuario y la password se coloque lo menos frecuentemente
+      posible.
+      En el banco central, esto NO es posible. El BCRA Exige autenticacion por
+      usuario y password.
+
+
+      Para esto, existe un mecanismo donde: El usuario se loguea con usuario y password
+      y el autorization server, le entrega un token y con ese token puedo re autenticarme
+      como mi persona.
+
+      Estrategias para administrar token, hay bastentes.
+
+      Un token por un año, que se renueva, spotify, netflix.
+      Un token que dura 15 minutos, pero poseo un refresh token que lo envio y ma otro 
+      token que dura 15 minutos. El refresh token dura uno o dos años.
+
+      Variantes de esto ? muchas.
+
+      Por cada request, te envia el siguiente token que tenes que usar. Medio paranoide.
+      
+
+      Para terminar con el tema token, tenemos, 
+      a) tokens que se guardan en base de datos.
+      b) token que se autovalidan (Json Web Token)
+      c) Mix donde para validar un JWT tengo que ir a una base de datos.
+
+
+      Los headers de http son ASCII por definicion; dicho esto, siempre voy a poder
+      ver la password. Ahora bien de punta a punta va encriptado por HTTPS
+      Clave Publica Privada + Encriptacion simetrica.
+     
+      En algun punto el https pasa a texto plano
+          
+      
+      Con respecto al guardado de la password la idea es usar sha2(password+salt)
+
+      Que es una funcion sobreyectiva 2 + 2 = 4
+                                      3 + 1 = 4
+                                     -1 + 5 = 4
+
+      Si me armo un diccionario de todos los md5 de una cantidad de palabras puedo
+      dar vuelta la password, lo que me dice es que cuanto mas larga la password
+      ma dificil es darla vuelta.
+
+      Por mas que la password sea hola si le concateno "hola" + laskdjasiysefsleifjsle
+                                                        Pass          Salt
+
+      bcrypt que es un algoritmo, que ya tiene un sistema de salt inlcuido.
+        
+----------------------------------------------------------------------
+Ejercicio
+----------------------------------------------------------------------
+
+Hacer un servidorsito en express
+
+hacer una app.get('/', (req, res) => {
+    Vamos a tomar el header "Authorization". 
+    Base64 a Textoplano ahi vamos a ver usu:pass
+    res.send('gracias')  
+})
+
+
+
+
+      
