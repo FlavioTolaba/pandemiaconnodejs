@@ -1,5 +1,5 @@
 const { WebClient } = require('@slack/web-api');
-const token = require('../../config/tokens').log4slackToken
+const token = require('./config/tokens').log4slackToken
 const web = new WebClient(token);
 const conversationId = 'logger-slack';
 
