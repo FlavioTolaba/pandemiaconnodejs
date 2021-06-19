@@ -41,3 +41,4 @@ build/
 ### VS Code ###
 .vscode/
 clase1/config/tokens.js
+clase1/.env

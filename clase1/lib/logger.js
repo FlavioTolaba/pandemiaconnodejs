@@ -1,5 +1,6 @@
 const log4js = require('log4js')
-const token = require('../config/tokens').log4slackToken
+require('dotenv').config();
+// const token = require('../config/tokens').log4slackToken // Cogemos el token a través de `dotenv`
 
 log4js.configure({
     appenders: {
@@ -7,7 +8,7 @@ log4js.configure({
         consola: { type: 'stdout' },
         alerts: {
             type: '@log4js-node/slack',
-            token,
+            token: process.env.LOG_FOR_SLACK_TOKEN,
             channel_id: 'logger-slack',
             username: 'log4slack'
         }
