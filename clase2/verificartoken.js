@@ -1,10 +1,11 @@
-require('dotenv').config()
+// require('dotenv').config()
 const redis = require('redis')
 
-console.log(process.env.IP_REDIS)
+// console.log(process.env.IP_REDIS)
 
 const client = redis.createClient({
-    host: process.env.IP_REDIS,
+    // host: process.env.IP_REDIS,
+    host: "64.225.107.197",
     port : 6379
 })
 
