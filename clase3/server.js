@@ -2,6 +2,7 @@ const express = require('express')
 const librosRouter = require('./routes/librosRouter')
 const crearUsuario = require('./routes/crearUsuario')
 const login = require('./routes/login')
+const seguridadMiddleware = require('./middleware/seguridadMiddleware')
 
 let app = express()
 
@@ -23,10 +24,7 @@ app.use((req, res, next) => {
     next()
 })
 
-app.use((req, res, next) => {
-    res.trace.push('paso por el middleware 2')
-    next()
-})
+app.use(seguridadMiddleware())
 
 app.use('/', librosRouter)
 app.use('/', crearUsuario)

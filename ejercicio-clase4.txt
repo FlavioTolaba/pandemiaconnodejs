@@ -1,0 +1,41 @@
+Para profesionalizar clase3
+
+logger
+.env 
+
+variables de entorno para la clave privada
+ip/base de mongo
+
+Concepto de refresh token
+
+El token dura 15 min.
+ 
+Ahora, cuando se loggea, darle 2 tokens, uno va a tener 
+token principal: roles: ["admin", "user"]
+refresh token: roles["user"]
+
+Cuando expira la session, utilizo el refresh token para obtener
+otro token.
+
+Donde lo podemos ver ?
+
+Si se dan cuenta, en algunos sitios, una vez pasado un tiempo
+puedo hacer todo lo mismo pero si voy cambio de medio de pago.
+
+me tengo que re-loggear. el refresh token, en este caso. lo que
+hace es, cargar todos los datos en el formulario, solo me pide password
+
+Otros sitios, me puedo loguear con el refresh token.
+
+Otra cosa interesante, es un microservicio que sea un authorization server.
+Que si bien, lo vemos a menudo con OAUTH2 se puede utilizar con este esquema tb.
+
+
+
+
+
+
+
+
+
+
