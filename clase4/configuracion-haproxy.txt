@@ -1,0 +1,10 @@
+frontend web-frontend
+    bind 167.71.60.132:80
+    # mode http
+    default_backend web-backend
+
+backend web-backend
+    balance roundrobin
+    server web-server1 167.71.60.132:3000 check
+    server web-server2 167.71.60.132:3001 check
+    server web-server3 167.71.60.132:3002 check
