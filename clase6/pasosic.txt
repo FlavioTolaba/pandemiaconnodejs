@@ -1,0 +1,90 @@
+----------------------------------------------------------------------
+Pasos para configurar la integracion continua
+----------------------------------------------------------------------
+
+Partimos de ubuntu 20.04 con docker
+
+instalacion de jenkins 
+
+https://tecadmin.net/how-to-install-jenkins-on-ubuntu-20-04/
+
+systemctl status jenkins.service
+
+Nueva tarea
+
+Configurar el origen del código fuente
+
+https://github.com/arteysoft/ic
+
+Agregar la clave privada por ssh
+
+Seleccionamos la rama /master u otra rama.
+
+Consultar repositorio (SCM) cada * * * * * Esto es a criterio
+
+Tambien se puede configurar el web hook
+https://docs.github.com/en/developers/webhooks-and-events/webhooks/about-webhooks
+
+Lo que es hace el webhook es enviar un http post cada vez que se hace un commit
+
+Aprovechen el web hook para tirarlo a un slack avisando que un hubo un merge.
+
+Cada paso que estoy hciendo es:
+
+// parar los containers
+docker ps -a | awk '{print $1}' | grep -v CONTAINER | xargs docker stop
+// remover el container
+docker ps -a | awk '{print $1}' | grep -v CONTAINER | xargs docker rm
+// remover la imagen
+docker rmi prueba1:1
+
+Lo otro que se puede hacer es docekr rmi -f (aunque haya containers borra todo)
+
+docker build -t prueba1:1 .
+
+Pongo en copia el Dockerfile
+
+FROM node
+LABEL author pandemiaconnode
+ENTRYPOINT ["node", "/workfolder/server.js"]
+RUN mkdir workfolder
+WORKDIR /workfolder
+COPY ./server.js /workfolder/server.js
+COPY ./package.json /workfolder/package.json
+EXPOSE 3000
+RUN npm install
+
+Por ultimo el docker run
+
+docker run -dp 80:3000 prueba1:1
+
+Como para jugar 
+
+const { exec } = require("child_process");
+
+let comando = "docker ps -a | awk '{print $1}' | grep -v CONTAINER"
+
+exec(comando, (err, stdout, stderr) => {
+   console.log(stdout)
+   exec("docker stop " + stdout, (err, stdout, stderr)=>{
+      console.log(stdout)
+   })
+})
+
+Para copiar la clave privada al servidor 
+
+scp -i \var\keys\frankfurt \Users\amvfa\.ssh\id_rsa root@143.244.154.34:/root/.ssh
+
+ATENCION !!! UNPROTECTED PRIVATE FILE
+
+chmod 400 id_rsa para que quede como solo lectura
+
+Ejercicio hacer en bash los pasos
+
+
+
+
+
+
+
+
